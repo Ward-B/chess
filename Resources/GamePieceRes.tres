@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChessPiece" load_steps=2 format=3 uid="uid://bvk211y0kv2xf"]
+
+[ext_resource type="Script" path="res://Resources/GamePieceRes.gd" id="1_ogpre"]
+
+[resource]
+script = ExtResource("1_ogpre")
+type = 0
+locX = 0
+locY = 0
+isWhite = false

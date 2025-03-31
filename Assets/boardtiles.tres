@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cdpwonpoi0eq"]
+
+[ext_resource type="Texture2D" uid="uid://vtma7e3ixvjd" path="res://Assets/pixel chess_v1.2/boardmaybe.png" id="1_sw7tv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7dnm6"]
+texture = ExtResource("1_sw7tv")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+0:1/0/modulate = Color(1, 1, 1, 0.392157)
+1:1/0 = 0
+1:1/0/modulate = Color(1, 1, 1, 0.392157)
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_7dnm6")
