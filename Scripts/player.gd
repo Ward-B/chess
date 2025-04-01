@@ -1,9 +1,11 @@
 class_name Player
 extends Node2D
 
-@export var isWhite: bool = false
-@export var playerNum: int = -1
+signal turn_ended
 
+@export var _isWhite: bool = false
+@export var _playerNum: int = -1
+var _selectedPiece: ChessPiece = null
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

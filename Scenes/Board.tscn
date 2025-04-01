@@ -1,12 +1,38 @@
-[gd_scene load_steps=2 format=4 uid="uid://des6wbvq81ykd"]
+[gd_scene load_steps=3 format=4 uid="uid://des6wbvq81ykd"]
 
 [ext_resource type="TileSet" uid="uid://cdpwonpoi0eq" path="res://Assets/boardtiles.tres" id="1_ra7vo"]
+
+[sub_resource type="GDScript" id="GDScript_tgjdh"]
+script/source = "extends TileMapLayer
+
+signal tile_selected()
+
+#func _input(event):
+#	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+#		_handle_mouse_click(event.position)
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_handle_mouse_click(event.position)
+		
+func _handle_mouse_click(position):
+	print(\"position: \" + str(position))
+	var cell = local_to_map(to_local(position))
+	print(\"cell: \" + str(cell))
+	if get_cell_source_id(cell) != -1:
+		print(\"Clicked on tile at: \", cell)
+	
+	
+"
 
 [node name="Board" type="Node2D"]
 
 [node name="BoardLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAADAAEAAAAAAAAAAAABAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAcAAAAAAAAAAAACAAYAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAYAAAAAAAAAAAADAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAABAAAAAAAGAAcAAAABAAAAAAAFAAYAAAABAAAAAAAEAAcAAAABAAAAAAAGAAUAAAABAAAAAAAHAAQAAAABAAAAAAAGAAMAAAABAAAAAAAHAAIAAAABAAAAAAAGAAEAAAABAAAAAAAHAAAAAAABAAAAAAAFAAAAAAABAAAAAAAEAAEAAAABAAAAAAAFAAIAAAABAAAAAAAEAAMAAAABAAAAAAAFAAQAAAABAAAAAAAEAAUAAAABAAAAAAADAAYAAAABAAAAAAACAAcAAAABAAAAAAABAAYAAAABAAAAAAAAAAcAAAABAAAAAAAAAAUAAAABAAAAAAABAAQAAAABAAAAAAACAAUAAAABAAAAAAADAAQAAAABAAAAAAACAAMAAAABAAAAAAADAAIAAAABAAAAAAADAAAAAAABAAAAAAACAAEAAAABAAAAAAABAAAAAAABAAAAAAAAAAEAAAABAAAAAAABAAIAAAABAAAAAAAAAAMAAAABAAAAAAA=")
 tile_set = ExtResource("1_ra7vo")
+script = SubResource("GDScript_tgjdh")
 
 [node name="HighlightLayer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_ra7vo")
+collision_enabled = false
+navigation_enabled = false

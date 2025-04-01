@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4bwmrwawhj3e"]
+[gd_scene load_steps=5 format=3 uid="uid://d4bwmrwawhj3e"]
 
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_3r1jd"]
 [ext_resource type="PackedScene" uid="uid://des6wbvq81ykd" path="res://Scenes/Board.tscn" id="1_x0rnk"]
+[ext_resource type="PackedScene" uid="uid://dv4jwlmb4pjiq" path="res://Scenes/TurnManager.tscn" id="2_kyfjm"]
+[ext_resource type="PackedScene" uid="uid://c670qpbojnyk" path="res://Scenes/HumanPlayer.tscn" id="4_lbby3"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_3r1jd")
 
 [node name="Board" parent="." instance=ExtResource("1_x0rnk")]
+scale = Vector2(4, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(256, 256)
+
+[node name="TurnManager" parent="." instance=ExtResource("2_kyfjm")]
+
+[node name="HumanPlayer" parent="." instance=ExtResource("4_lbby3")]
