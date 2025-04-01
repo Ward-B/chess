@@ -5,6 +5,7 @@ signal turn_ended
 
 @export var _isWhite: bool = false
 @export var _playerNum: int = -1
+@export var _chessPieces: Array[ChessPiece] = []
 var _selectedPiece: ChessPiece = null
 
 

@@ -4,5 +4,5 @@ extends Node2D
 
 
 func _ready() -> void:
-
+	$Board/BoardLayer.tile_clicked.connect($HumanPlayer.on_tile_clicked)
 	pass # Replace with function body.

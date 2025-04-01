@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci5b80nulj0nx"]
-
-[ext_resource type="Script" path="res://Scripts/piece_manager.gd" id="1_0xnbs"]
-
-[node name="PieceManager" type="Node"]
-script = ExtResource("1_0xnbs")

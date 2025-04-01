@@ -1,9 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4bwmrwawhj3e"]
+[gd_scene load_steps=6 format=3 uid="uid://d4bwmrwawhj3e"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_3r1jd"]
 [ext_resource type="PackedScene" uid="uid://des6wbvq81ykd" path="res://Scenes/Board.tscn" id="1_x0rnk"]
 [ext_resource type="PackedScene" uid="uid://dv4jwlmb4pjiq" path="res://Scenes/TurnManager.tscn" id="2_kyfjm"]
 [ext_resource type="PackedScene" uid="uid://c670qpbojnyk" path="res://Scenes/HumanPlayer.tscn" id="4_lbby3"]
+
+[sub_resource type="GDScript" id="GDScript_cb0ch"]
+resource_name = "piece_manager"
+script/source = "extends Node
+
+@export var _allPieces: Array[ChessPiece] = []
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3r1jd")
@@ -15,5 +31,8 @@ scale = Vector2(3, 3)
 position = Vector2(200, 200)
 
 [node name="TurnManager" parent="." instance=ExtResource("2_kyfjm")]
+
+[node name="PieceManager" type="Node" parent="."]
+script = SubResource("GDScript_cb0ch")
 
 [node name="HumanPlayer" parent="." instance=ExtResource("4_lbby3")]
