@@ -9,10 +9,10 @@
 script = ExtResource("1_3r1jd")
 
 [node name="Board" parent="." instance=ExtResource("1_x0rnk")]
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(256, 256)
+position = Vector2(200, 200)
 
 [node name="TurnManager" parent="." instance=ExtResource("2_kyfjm")]
 
