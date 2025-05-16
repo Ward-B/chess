@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PawnPiece" load_steps=2 format=3 uid="uid://bopcg1duwhub8"]
+
+[ext_resource type="Script" path="res://Resources/GamePieces/PawnPieceRes.gd" id="1_co5qh"]
+
+[resource]
+script = ExtResource("1_co5qh")
+type = 0
+location = Vector2i(0, 0)
+isWhite = false
+moveDirections = Array[Vector2i]([])

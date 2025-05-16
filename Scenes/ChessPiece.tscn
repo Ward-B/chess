@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc2v5bax5x1o7"]
+
+[ext_resource type="Script" path="res://Scripts/ChessPiece.gd" id="1_b3gk6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xyob"]
+size = Vector2(16, 16)
+
+[node name="ChessPiece" type="Node2D"]
+script = ExtResource("1_b3gk6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(3, 3)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_3xyob")

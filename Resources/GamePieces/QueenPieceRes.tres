@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="QueenPiece" load_steps=2 format=3 uid="uid://8jn58b8x3q55"]
+
+[ext_resource type="Script" path="res://Resources/GamePieces/QueenPieceRes.gd" id="1_47fyg"]
+
+[resource]
+script = ExtResource("1_47fyg")
+type = 4
+isWhite = false
+moveDirections = Array[Vector2i]([])

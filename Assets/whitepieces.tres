@@ -1,0 +1,6 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dpdjmegg57827"]
+
+[ext_resource type="Texture2D" uid="uid://dcun7qnrbb67w" path="res://Assets/pixel chess_v1.2/16x16 pieces/WhitePieces.png" id="1_um8ge"]
+
+[resource]
+atlas = ExtResource("1_um8ge")

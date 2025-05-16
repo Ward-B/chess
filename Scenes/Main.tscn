@@ -1,25 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4bwmrwawhj3e"]
+[gd_scene load_steps=10 format=3 uid="uid://d4bwmrwawhj3e"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_3r1jd"]
 [ext_resource type="PackedScene" uid="uid://des6wbvq81ykd" path="res://Scenes/Board.tscn" id="1_x0rnk"]
 [ext_resource type="PackedScene" uid="uid://dv4jwlmb4pjiq" path="res://Scenes/TurnManager.tscn" id="2_kyfjm"]
+[ext_resource type="Script" path="res://Scripts/piece_manager.gd" id="4_kv5hq"]
 [ext_resource type="PackedScene" uid="uid://c670qpbojnyk" path="res://Scenes/HumanPlayer.tscn" id="4_lbby3"]
+[ext_resource type="PackedScene" uid="uid://dc2v5bax5x1o7" path="res://Scenes/ChessPiece.tscn" id="5_f03pc"]
+[ext_resource type="Resource" uid="uid://378gutpxdiev" path="res://Resources/GamePieces/KingPieceRes.tres" id="6_gb32q"]
+[ext_resource type="Script" path="res://Resources/GamePieces/PawnPieceRes.gd" id="8_0iare"]
 
-[sub_resource type="GDScript" id="GDScript_cb0ch"]
-resource_name = "piece_manager"
-script/source = "extends Node
-
-@export var _allPieces: Array[ChessPiece] = []
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[sub_resource type="Resource" id="Resource_3b1ps"]
+script = ExtResource("8_0iare")
+type = 0
+moveDirections = Array[Vector2i]([])
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3r1jd")
@@ -33,6 +26,21 @@ position = Vector2(200, 200)
 [node name="TurnManager" parent="." instance=ExtResource("2_kyfjm")]
 
 [node name="PieceManager" type="Node" parent="."]
-script = SubResource("GDScript_cb0ch")
+script = ExtResource("4_kv5hq")
+_chess_piece_scene = ExtResource("5_f03pc")
 
 [node name="HumanPlayer" parent="." instance=ExtResource("4_lbby3")]
+
+[node name="ChessPiece" parent="." instance=ExtResource("5_f03pc")]
+position = Vector2(24, 24)
+pieceData = ExtResource("6_gb32q")
+
+[node name="Sprite2D" parent="ChessPiece" index="0"]
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="ChessPiece2" parent="." instance=ExtResource("5_f03pc")]
+position = Vector2(72, 72)
+pieceData = SubResource("Resource_3b1ps")
+
+[editable path="ChessPiece"]
+[editable path="ChessPiece2"]

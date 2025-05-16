@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="KingPiece" load_steps=2 format=3 uid="uid://378gutpxdiev"]
+
+[ext_resource type="Script" path="res://Resources/GamePieces/KingPieceRes.gd" id="1_862nm"]
+
+[resource]
+script = ExtResource("1_862nm")
+type = 5
+isWhite = false
+moveDirections = Array[Vector2i]([])
