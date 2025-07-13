@@ -1,9 +1,8 @@
 [gd_resource type="Resource" script_class="RookPiece" load_steps=2 format=3 uid="uid://dhxjdpjkiosbd"]
 
-[ext_resource type="Script" path="res://Resources/GamePieces/RookPieceRes.gd" id="1_a6wgr"]
+[ext_resource type="Script" uid="uid://b3iijj4qt6n4u" path="res://Resources/GamePieces/RookPieceRes.gd" id="1_a6wgr"]
 
 [resource]
 script = ExtResource("1_a6wgr")
 type = 2
-isWhite = false
 moveDirections = Array[Vector2i]([])

@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://d4bwmrwawhj3e"]
 
-[ext_resource type="Script" path="res://Scripts/main.gd" id="1_3r1jd"]
+[ext_resource type="Script" uid="uid://dvxi7a1qmbkpp" path="res://Scripts/main.gd" id="1_3r1jd"]
 [ext_resource type="PackedScene" uid="uid://des6wbvq81ykd" path="res://Scenes/Board.tscn" id="1_x0rnk"]
 [ext_resource type="PackedScene" uid="uid://dv4jwlmb4pjiq" path="res://Scenes/TurnManager.tscn" id="2_kyfjm"]
-[ext_resource type="Script" path="res://Scripts/piece_manager.gd" id="4_kv5hq"]
+[ext_resource type="Script" uid="uid://bk4y4lo6lajix" path="res://Scripts/piece_manager.gd" id="4_kv5hq"]
 [ext_resource type="PackedScene" uid="uid://c670qpbojnyk" path="res://Scenes/HumanPlayer.tscn" id="4_lbby3"]
 [ext_resource type="PackedScene" uid="uid://dc2v5bax5x1o7" path="res://Scenes/ChessPiece.tscn" id="5_f03pc"]
 [ext_resource type="Resource" uid="uid://378gutpxdiev" path="res://Resources/GamePieces/KingPieceRes.tres" id="6_gb32q"]
-[ext_resource type="Script" path="res://Resources/GamePieces/PawnPieceRes.gd" id="8_0iare"]
+[ext_resource type="Script" uid="uid://crvhlvwc72me1" path="res://Resources/GamePieces/PawnPieceRes.gd" id="8_0iare"]
 
 [sub_resource type="Resource" id="Resource_3b1ps"]
 script = ExtResource("8_0iare")
