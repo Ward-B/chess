@@ -6,7 +6,9 @@ func _determine_moveset():
 	pass
 
 func _initializeTex(isWhite: bool) -> Texture2D:
-	if isWhite:
-		return piecesWhite.setRegion(16, 0, 16, 16).get_atlas()
-	else:
-		return piecesBlack.setRegion(16, 0, 16, 16).get_atlas()
+       if isWhite:
+               piecesWhite.set_region(Rect2(16, 0, 16, 16))
+               return piecesWhite
+       else:
+               piecesBlack.set_region(Rect2(16, 0, 16, 16))
+               return piecesBlack
