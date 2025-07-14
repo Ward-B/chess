@@ -3,7 +3,8 @@ extends Node
 @export var _chess_piece_scene: PackedScene
 @export var _piecesBlack: Array[PackedScene]
 @export var _piecesWhite: Array[PackedScene]
-@export var _piecesRemoved: Array[PackedScene] = []
+@export var _piecesRemovedBlack: Array[PackedScene] = []
+@export var _piecesRemovedWhite: Array[PackedScene] = []
 
 const PIECE_TYPES = {
     "rook": preload("res://Resources/GamePieces/RookPieceRes.tres"),
