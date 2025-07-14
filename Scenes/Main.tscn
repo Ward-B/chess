@@ -28,6 +28,9 @@ position = Vector2(200, 200)
 [node name="PieceManager" type="Node" parent="."]
 script = ExtResource("4_kv5hq")
 _chess_piece_scene = ExtResource("5_f03pc")
+_piecesBlack = null
+_piecesWhite = null
+_piecesRemoved = null
 
 [node name="HumanPlayer" parent="." instance=ExtResource("4_lbby3")]
 
