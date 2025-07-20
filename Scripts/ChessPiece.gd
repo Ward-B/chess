@@ -1,7 +1,9 @@
 extends Node2D
 
 @export var pieceData: ChessPiece
+
 @onready var sprite = $Sprite2D
+@onready var tile_hit_box = $TileHitBox
 
 var isWhite: bool
 
