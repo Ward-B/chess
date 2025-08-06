@@ -23,7 +23,7 @@ const PIECE_TYPES = {
 func _ready() -> void:
     _spawn_piece("king", false, Vector2i(24,24)) # tile (1,1)
     _spawn_piece("pawn", true, Vector2i(72,72))
-    _spawn_piece("pawn", false, Vector2i(118,118))
+    _spawn_piece("pawn", false, Vector2i(120,120))
     
     _board = get_parent().get_node("BoardManager").all_tiles
     _setupPiecesDict()
