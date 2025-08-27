@@ -23,3 +23,8 @@ script = ExtResource("4_kv5hq")
 _chess_piece_scene = ExtResource("5_f03pc")
 
 [node name="HumanPlayer" parent="." instance=ExtResource("4_lbby3")]
+
+[connection signal="piece_clicked" from="HumanPlayer/MouseController" to="PieceManager" method="_on_piece_clicked"]
+[connection signal="tile_clicked" from="HumanPlayer/MouseController" to="PieceManager" method="_on_tile_clicked"]
+
+[editable path="HumanPlayer"]

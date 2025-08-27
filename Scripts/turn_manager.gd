@@ -6,6 +6,7 @@ extends Node
 @export var _curPlayerNum: int = -1
 @export var _players: Array[Player] = []
 
+var _player1_white : bool = true
 
 signal turn_started(newPlayer: Player)
 

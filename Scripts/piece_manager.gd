@@ -8,7 +8,7 @@ extends Node
 
 var _board
 var _pieceLocations = {} # empty dictionary
-var _selectedPiece = null
+var _selected_piece = null
 
 const PIECE_TYPES = {
 	"rook": preload("res://Resources/GamePieces/RookPieceRes.tres"),
@@ -22,9 +22,6 @@ const PIECE_TYPES = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#_spawn_piece("king", false, Vector2i(0,0)) # tile (1,1)
-	#_spawn_piece("pawn", true, Vector2i(5,5))
-	#_spawn_piece("pawn", false, Vector2i(0,6))
 	_setupTeams(true)
 	_board = get_parent().get_node("BoardManager").all_tiles
 	_setupPiecesDict()
@@ -66,3 +63,27 @@ func _setupTeams(isWhite: bool):
 		if i == 4: 
 			_spawn_piece("queen", isWhite, Vector2i(i, 0))
 			_spawn_piece("queen", !isWhite, Vector2i(i, 7))
+
+func _select_piece(piece):
+	if _selected_piece == piece:
+		piece.tile_hit_box.set_selected(false)
+		_selected_piece = null
+		return
+	_deselect_current()
+	_selected_piece = piece
+	_selected_piece.tile_hit_box.set_selected(true)
+	
+func _deselect_current():
+	if _selected_piece:
+		_selected_piece.tile_hit_box.set_selected(false)
+		_selected_piece = null
+
+func _on_tile_clicked(tile: Vector2i):
+	# to-do: either deselect or move selected piece if allowed
+	
+	_deselect_current()
+
+
+func _on_piece_clicked(piece: Variant) -> void:
+	# to-do: either allow selection of an owned piece, attack an opposing one, or de/reselect
+	_select_piece(piece) 
