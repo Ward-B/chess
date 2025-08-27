@@ -4,5 +4,5 @@ extends Node2D
 
 
 func _ready() -> void:
-    $HumanPlayer/MouseController.tile_clicked.connect($HumanPlayer.on_tile_clicked)
-    pass # Replace with function body.
+	$HumanPlayer/MouseController.tile_clicked.connect($HumanPlayer.on_tile_clicked)
+	pass # Replace with function body.

@@ -2,10 +2,10 @@ extends Player
 
 
 func _on_select():
-    pass
-    
+	pass
+	
 func _on_deselect():
-    pass
+	pass
 
 func on_tile_clicked(tile: Vector2i):
-    print("signal received")
+	print("signal received")
