@@ -15,8 +15,9 @@ func _ready() -> void:
 	board = get_parent().get_parent().get_node("BoardManager").get_node("BoardLayer")
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		_handle_mouse_click(event.position)
+	if get_parent()._is_active:
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_handle_mouse_click(event.position)
 		
 func _handle_mouse_click(position):
 	_determine_cell()

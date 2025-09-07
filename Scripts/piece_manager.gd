@@ -9,6 +9,7 @@ extends Node
 var _board
 var _pieceLocations = {} # empty dictionary
 var _selected_piece = null
+@onready var turn_manager = get_node("../TurnManager")
 
 signal piece_selected(move_cells,attackable_cells)
 
@@ -27,6 +28,7 @@ func _ready() -> void:
 	_board = get_parent().get_node("BoardManager")
 	_setupPiecesDict()
 	_setupTeams(true)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -68,14 +70,12 @@ func _setupTeams(isWhite: bool):
 
 func _select_piece(piece):
 	if _selected_piece == piece:
-		piece.tile_hit_box.set_selected(false)
-		_selected_piece = null
+		_deselect_current()
 		return
 	_deselect_current()
 	_selected_piece = piece
 	_selected_piece.tile_hit_box.set_selected(true)
 	_form_highlight_data(_selected_piece)
-
 	
 func _deselect_current():
 	if _selected_piece:
@@ -104,4 +104,10 @@ func _on_tile_clicked(tile: Vector2i):
 
 func _on_piece_clicked(piece: Variant) -> void:
 	# to-do: either allow selection of an owned piece, attack an opposing one, or de/reselect
-	_select_piece(piece) 
+	#_select_piece(piece) 
+	var current_player = turn_manager._players[turn_manager._curPlayerNum]
+	if piece.isWhite == current_player._isWhite:
+		_select_piece(piece)
+	elif _selected_piece:
+		# TODO: handle attack on opposing piece
+		pass
