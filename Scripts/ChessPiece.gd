@@ -32,12 +32,10 @@ func _setup(in_isWhite: bool, in_pieceData: ChessPiece):
 	else:
 		pieceData = in_pieceData
 		pieceData._setup(isWhite)
-
-
 	#sprite.texture = pieceData.texture
 	_determineTex()
 
-		
+
 func _determineTex():
 	if isWhite:
 		sprite.texture = preload("res://Assets/whitepieces.tres")
@@ -45,3 +43,7 @@ func _determineTex():
 		sprite.texture = preload("res://Assets/blackpieces.tres")
 	sprite.region_enabled = true
 	sprite.set_region_rect(Rect2(pieceData.type*16, 0, 16, 16))
+
+func _move(newLoc:Vector2i):
+	move_local_x(newLoc.x)
+	move_local_y(newLoc.y)

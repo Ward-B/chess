@@ -6,3 +6,4 @@
 script = ExtResource("1_ogpre")
 type = 0
 moveDirections = Array[Vector2i]([])
+attackDirections = Array[Vector2i]([])

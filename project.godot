@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 window/size/viewport_width=512
 window/size/viewport_height=512
 
+[dotnet]
+
+project/assembly_name="chess"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gamedev_assistant/plugin.cfg")

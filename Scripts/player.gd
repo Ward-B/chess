@@ -11,10 +11,10 @@ var _selectedPiece: ChessPiece = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    pass
+	pass
 
 func _startTurn():
-    pass
+	pass
 
 func _endTurn():
-    pass
+	pass
