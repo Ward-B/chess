@@ -1,7 +1,7 @@
 class_name QueenPiece 
 extends ChessPiece
 
-func _ready() -> void:
+func _init() -> void:
 	repeats = true
 
 func _determine_moveset():

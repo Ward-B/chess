@@ -44,6 +44,9 @@ func _determineTex():
 	sprite.region_enabled = true
 	sprite.set_region_rect(Rect2(pieceData.type*16, 0, 16, 16))
 
-func _move(newLoc:Vector2i):
-	move_local_x(newLoc.x)
-	move_local_y(newLoc.y)
+func _move(newLoc:Vector2):
+	#var target_pos = board.get_node("BoardLayer").tile_to_position(newLoc)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", newLoc, 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	#move_local_x(newLoc.x)
+	#move_local_y(newLoc.y)
