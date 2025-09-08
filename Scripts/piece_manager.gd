@@ -41,7 +41,7 @@ func _spawn_piece(piece_type: String, isWhite: bool, in_board_pos: Vector2i = Ve
 	var resource = PIECE_TYPES.get(piece_type)
 	add_child(piece)
 	piece._setup(isWhite, resource)
-	_pieceLocations[in_board_pos] = ["piece_type", isWhite]
+	_pieceLocations[in_board_pos] = [piece_type, isWhite]
 
 func _setupPiecesDict():
 	for cell in _board.all_tiles:
@@ -78,6 +78,7 @@ func _select_piece(piece):
 	_form_highlight_data(_selected_piece)
 	
 func _deselect_current():
+	_board.clear_highlights()
 	if _selected_piece:
 		_selected_piece.tile_hit_box.set_selected(false)
 		_selected_piece = null
@@ -85,17 +86,46 @@ func _deselect_current():
 func _form_highlight_data(selected_piece):
 	var localPiecePos = _board.get_node("BoardLayer").to_local(selected_piece.position)
 	var cellPiece = _board.get_node("BoardLayer").local_to_map(localPiecePos) # cell where the piece is
+	var result = _calc_move_attack_tiles(cellPiece, selected_piece)
+	#for offset: Vector2i in selected_piece.pieceData.moveDirections:
+		#var target = cellPiece+offset
+		#if target.x in range(8) and target.y in range(8):
+			#if _pieceLocations.has(target) and _pieceLocations[target][0] == "none":
+				#reachable_tiles.append(target)
+	#for offset: Vector2i in selected_piece.pieceData.attackDirections:
+		#var target = cellPiece+offset
+		#if target.x in range(8) and target.y in range(8):
+			#if _pieceLocations.has(target) and _pieceLocations[target][0] != "none":
+				#if _pieceLocations[target][1] != selected_piece.isWhite:
+					#attackable_tiles.append(target)
+					
+	piece_selected.emit(result["moves"], result["attacks"]) # should provide the tiles to be highlighted
+
+func _calc_move_attack_tiles(currentPos, selectedPiece):
 	var attackable_tiles = []
 	var reachable_tiles = []
-	for i: Vector2i in selected_piece.pieceData.moveDirections:
-		if i.x in range(8) and i.y in range(8):
-			if _pieceLocations.has(i) and _pieceLocations[i][0] == "none":
-				reachable_tiles.append(cellPiece+i)
-	for i: Vector2i in selected_piece.pieceData.attackDirections:
-		if i.x in range(8) and i.y in range(8):
-			if _pieceLocations.has(i) and _pieceLocations[i][0] != "none":
-				attackable_tiles.append(cellPiece+i)
-	piece_selected.emit(reachable_tiles, attackable_tiles) # should provide the tiles to be highlighted
+	for offset: Vector2i in selectedPiece.pieceData.moveDirections:
+		var target = currentPos+offset
+		if selectedPiece.pieceData.repeats:
+			while _pieceLocations.has(target):
+				if _pieceLocations[target][0] == "none":
+					reachable_tiles.append(target)
+					target+=offset
+				elif (_pieceLocations[target][0] != "none" and 
+					_pieceLocations[target][1] != selectedPiece.isWhite):
+					attackable_tiles.append(target)
+					break
+				else:
+					break
+		else:
+			if _pieceLocations.has(target):
+				if _pieceLocations[target][0] == "none":
+					reachable_tiles.append(target)
+				elif (_pieceLocations[target][0] != "none" and 
+					_pieceLocations[target][1] != selectedPiece.isWhite):
+					attackable_tiles.append(target)
+	var result = {"moves":reachable_tiles,"attacks":attackable_tiles}
+	return result
 
 func _on_tile_clicked(tile: Vector2i):
 	# to-do: either deselect or move selected piece if allowed

@@ -10,6 +10,7 @@ enum Type {PAWN, KNIGHT, ROOK, BISHOP, QUEEN, KING}
 var piecesWhite: AtlasTexture
 var piecesBlack: AtlasTexture
 var texture: Texture2D
+var repeats = false
 	
 func _setup(in_isWhite = true):
 	_determine_moveset()
