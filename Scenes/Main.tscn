@@ -16,10 +16,25 @@ scale = Vector2(3, 3)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(200, 200)
 
-[node name="TurnManager" parent="." instance=ExtResource("2_kyfjm")]
+[node name="TurnManager" parent="." node_paths=PackedStringArray("_players") instance=ExtResource("2_kyfjm")]
+_players = [NodePath("../HumanPlayer"), NodePath("../HumanPlayer2")]
 
 [node name="PieceManager" type="Node" parent="."]
 script = ExtResource("4_kv5hq")
 _chess_piece_scene = ExtResource("5_f03pc")
 
 [node name="HumanPlayer" parent="." instance=ExtResource("4_lbby3")]
+_isWhite = true
+_playerNum = 0
+
+[node name="HumanPlayer2" parent="." instance=ExtResource("4_lbby3")]
+_playerNum = 1
+
+[connection signal="piece_selected" from="PieceManager" to="BoardManager" method="_on_piece_manager_piece_selected"]
+[connection signal="piece_clicked" from="HumanPlayer/MouseController" to="PieceManager" method="_on_piece_clicked"]
+[connection signal="tile_clicked" from="HumanPlayer/MouseController" to="PieceManager" method="_on_tile_clicked"]
+[connection signal="piece_clicked" from="HumanPlayer2/MouseController" to="PieceManager" method="_on_piece_clicked"]
+[connection signal="tile_clicked" from="HumanPlayer2/MouseController" to="PieceManager" method="_on_tile_clicked"]
+
+[editable path="HumanPlayer"]
+[editable path="HumanPlayer2"]

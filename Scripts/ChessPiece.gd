@@ -6,6 +6,7 @@ extends Node2D
 @onready var tile_hit_box = $TileHitBox
 
 var isWhite: bool
+var diepeZucht: bool = false
 
 func _ready():
 	pass
@@ -20,12 +21,21 @@ func _process(delta: float) -> void:
 	pass
 
 func _setup(in_isWhite: bool, in_pieceData: ChessPiece):
-	pieceData = in_pieceData
 	isWhite = in_isWhite
-	pieceData._setup(isWhite)
+	if(!isWhite && in_pieceData.type == pieceData.Type.PAWN): # zucht...
+		pieceData = in_pieceData.duplicate()
+		pieceData._setup(isWhite)
+		for i in range(pieceData.moveDirections.size()):
+			pieceData.moveDirections[i] *= -1 # this oughta 'invert' the possible moves
+		for i in range(pieceData.attackDirections.size()):
+			pieceData.attackDirections[i] *= -1 # this oughta 'invert' the possible moves
+	else:
+		pieceData = in_pieceData
+		pieceData._setup(isWhite)
 	#sprite.texture = pieceData.texture
 	_determineTex()
-		
+
+
 func _determineTex():
 	if isWhite:
 		sprite.texture = preload("res://Assets/whitepieces.tres")
@@ -33,3 +43,10 @@ func _determineTex():
 		sprite.texture = preload("res://Assets/blackpieces.tres")
 	sprite.region_enabled = true
 	sprite.set_region_rect(Rect2(pieceData.type*16, 0, 16, 16))
+
+func _move(newLoc:Vector2):
+	#var target_pos = board.get_node("BoardLayer").tile_to_position(newLoc)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", newLoc, 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	#move_local_x(newLoc.x)
+	#move_local_y(newLoc.y)

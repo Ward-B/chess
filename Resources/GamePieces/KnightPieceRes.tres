@@ -6,3 +6,4 @@
 script = ExtResource("1_6mgm7")
 type = 1
 moveDirections = Array[Vector2i]([])
+attackDirections = Array[Vector2i]([])
