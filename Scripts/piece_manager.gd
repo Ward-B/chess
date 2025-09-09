@@ -121,9 +121,16 @@ func _calc_move_attack_tiles(currentPos, selectedPiece):
 			if _pieceLocations.has(target):
 				if _pieceLocations[target][0] == "none":
 					reachable_tiles.append(target)
-				elif (_pieceLocations[target][0] != "none" and 
+				elif ((_pieceLocations[target][0] != "none" and _pieceLocations[currentPos][0] != "pawn") and 
 					_pieceLocations[target][1] != selectedPiece.isWhite):
 					attackable_tiles.append(target)
+	if _pieceLocations[currentPos][0] == "pawn":
+		for offset: Vector2i in selectedPiece.pieceData.attackDirections:
+			var target = currentPos+offset
+			if (_pieceLocations.has(target) and 
+			_pieceLocations[target][0] != "none" and 
+			_pieceLocations[target][1] != selectedPiece.isWhite):
+				attackable_tiles.append(target)
 	var result = {"moves":reachable_tiles,"attacks":attackable_tiles}
 	return result
 
@@ -138,17 +145,31 @@ func _on_tile_clicked(tile: Vector2i):
 	var current_player = turn_manager._players[turn_manager._curPlayerNum]
 	if (_board.highlight_layer.get_used_cells().has(tile) 
 	and _selected_piece and _pieceLocations[tile][0] == "none"):
-		var localPiecePos = _board.get_node("BoardLayer").to_local(_selected_piece.position)
-		var curPos = _board.get_node("BoardLayer").local_to_map(localPiecePos)
-		_pieceLocations[tile][0] = _pieceLocations[curPos][0] # update dict
-		_pieceLocations[tile][1] = _pieceLocations[curPos][1] # update dict
-		_pieceLocations[curPos][0] = "none"
-		_pieceLocations[curPos][1] = true
-		_selected_piece._move(tile_to_position(tile))
+		movePiece(tile)
 		current_player._endTurn()
+	elif (_board.highlight_layer.get_used_cells().has(tile) 
+	and _selected_piece and _pieceLocations[tile][0] != "none"):	
+		return	# do nothing, since this is supposed to be taken care of by _on_piece_clicked
 	else:
 		_deselect_current()
 
+func movePiece(tile: Vector2i):
+	var localPiecePos = _board.get_node("BoardLayer").to_local(_selected_piece.position)
+	var curPos = _board.get_node("BoardLayer").local_to_map(localPiecePos)
+	_pieceLocations[tile][0] = _pieceLocations[curPos][0] # update dict
+	_pieceLocations[tile][1] = _pieceLocations[curPos][1] # update dict
+	_pieceLocations[curPos][0] = "none"
+	_pieceLocations[curPos][1] = true
+	_selected_piece._move(tile_to_position(tile))
+		
+func tryAttackPiece(piece):
+	var current_player = turn_manager._players[turn_manager._curPlayerNum]
+	var targetedPiecePos = _board.get_node("BoardLayer").to_local(piece.position)
+	var targetTile = _board.get_node("BoardLayer").local_to_map(targetedPiecePos)
+	if _board.highlight_layer.get_used_cells().has(targetTile):
+		movePiece(targetTile)
+		piece.queue_free()
+		current_player._endTurn()
 
 func _on_piece_clicked(piece: Variant) -> void:
 	# to-do: either allow selection of an owned piece, attack an opposing one, or de/reselect
@@ -158,4 +179,4 @@ func _on_piece_clicked(piece: Variant) -> void:
 		_select_piece(piece)
 	elif _selected_piece:
 		# TODO: handle attack on opposing piece
-		pass
+		tryAttackPiece(piece)
